@@ -3,7 +3,8 @@ from os.path import isfile
 from sys import stderr
 from csv import reader
 from node import Node
-from graph import Graph, Heuristic
+from graph import Graph, NNHeuristic
+from time import time
 
 def check_file(file):
     if not isfile(file) or not access(file, R_OK):
@@ -28,10 +29,14 @@ def read_csv(f_name):
 
 
 def main():
-    coordinates_list = read_csv('vn_map.csv')
+    start = time()
+
+    coordinates_list = read_csv('it16862.csv')
+    total = len(coordinates_list)
+    count = 0
 
     graph = Graph()
-    heuristic = Heuristic()
+    heuristic = NNHeuristic()
 
     graph.add_to_path(coordinates_list[0])
 
@@ -41,14 +46,18 @@ def main():
             nod, dis = heuristic.get_closest(node, cities_left)
             graph.add_to_path(nod)
             graph.add_distance(dis)
+            print("Processing: " + str(round(len(graph.path)/total * 100, 2)) + "%")
         else:
-            nod, dis = heuristic.get_closest(node, [graph.path[0]])
-            graph.add_to_path(nod)
-            graph.add_distance(dis)
             break
+    end = time()
+    # final = TwoOpt()
+    # run_twoopt = final.run_2opt(graph.path[::-1])
+
 
     print('TOTAL LENGTH:', graph.total_distances)
-    print('PATH:', '-> '.join([x.get_city() for x in graph.path]))
+    print('PATH:', '-> '.join([x.city_name for x in graph.path]))
+    # print('TWOOPT PATH', run_twoopt)
+    print('TIME:', end - start)
 
 
 if __name__ == '__main__':
