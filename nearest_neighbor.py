@@ -3,7 +3,7 @@ from math import sqrt
 
 
 class NNHeuristic(Graph):
-    def shortest_distance(self, outset, cities):
+    def __shortest_distance(self, outset, cities):
         lat, long = outset.lat, outset.long
         closest_city = tuple()
         for node in cities:
@@ -16,16 +16,12 @@ class NNHeuristic(Graph):
                 closest_city = (node, euclidean_dist)
         return closest_city
 
-    def run(self, coordinates_list):
+    def find_shortest_path(self, coordinates_list):
         self.path.append(coordinates_list.pop(0))
         nod = self.path[0]
-        total = len(coordinates_list)
-        count = 0
         while coordinates_list:
-            nod, dis = self.shortest_distance(nod, coordinates_list)
+            nod, dis = self.__shortest_distance(nod, coordinates_list)
             self.path.append(nod)
             coordinates_list.remove(nod)
             self.total_distances += dis
-            # print('Processing:', str(round(count/total*100, 2)))
-            count += 1
         return self.show_path(), self.path
