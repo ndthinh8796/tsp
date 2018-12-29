@@ -25,7 +25,7 @@ class TwoOpt(Graph):
         return self.show_path()
 
     def __swap_2opt(self, route, i, k):
-        return route[:i] + route[i:k+1][::-1  ] + route[k+1:]
+        return route[:i] + route[i:k+1][::-1] + route[k+1:]
 
     def __route_distance(self, route):
         dist = 0

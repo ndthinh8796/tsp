@@ -8,7 +8,7 @@ class NNHeuristic(Graph):
         closest_city = tuple()
         for node in cities:
             euclidean_dist = sqrt((node.lat - lat)**2 +
-                                    (node.long - long)**2)
+                                  (node.long - long)**2)
             if closest_city:
                 if closest_city[1] > euclidean_dist:
                     closest_city = (node, euclidean_dist)

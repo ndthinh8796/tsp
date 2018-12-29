@@ -5,6 +5,7 @@ from sys import stderr
     Use csv module to read file
 """
 
+
 def check_file(file):
     from os import access, R_OK
     from os.path import isfile

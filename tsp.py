@@ -32,9 +32,9 @@ def execute_command(command, file):
     coordinates_list = read_csv(file)
 
     if len(coordinates_list) > 10 and command == 'brute_force':
-        stderr.write('Brute Force algorithm should only be use for map <='+
-                     ' 10 cities\n'+
-                     '\033[01;91mBetter options\033[00m: '+
+        stderr.write('Brute Force algorithm should only be use for map <=' +
+                     ' 10 cities\n' +
+                     '\033[01;91mBetter options\033[00m: ' +
                      'two_opt, nearest_neighbor\n')
         exit(0)
 
